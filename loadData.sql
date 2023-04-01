@@ -1,11 +1,21 @@
 -- Inicio
 -- Para las preguntas 1 y 2
 
+-- Crear productos
+INSERT INTO producto(nombre, precio, id_tienda)
+VALUES 
+    ('Sony PlayStation 2', 20.00, 1),
+    ('polera tommy hilfiger', 20.00, 2),
+    ('polera nike', 10.00, 2),
+    ('polera adidas', 15.00, 2),
+    ('polera puma', 7.00, 2);
 /*
 Pregunta 1: Suponiendo..
 
 
 Pregunta 2: Suponiendo..
+
+
     Hites vende:
         ('iPhone 13 Pro Max', 1500.00, 1)
         ('Samsung Galaxy S21 Ultra', 1000.00, 1)
@@ -22,14 +32,6 @@ Pregunta 2: Suponiendo..
         Hites -> Sony PlayStation 2 producto más barato
         Ripley -> polera puma producto más barato
 
-    Respuesta de la consulta:
-
-    SELECT tienda.nombre AS nombre_tienda, producto.nombre AS nombre_producto, producto.precio
-    FROM tienda
-    JOIN producto ON tienda.id_tienda = producto.id_tienda
-    WHERE producto.precio = (
-    SELECT MIN(precio) FROM producto WHERE id_tienda = tienda.id_tienda
-    );
 */
 
 -- Para las preguntas 3 y 4
@@ -63,12 +65,7 @@ INSERT INTO producto(nombre, precio, id_tienda)
 VALUES 
     ('iPhone 13 Pro Max', 1500.00, 1),
     ('Samsung Galaxy S21 Ultra', 1000.00, 1),
-    ('Sony PlayStation 5', 500.00, 1),
-    ('Sony PlayStation 2', 20.00, 1),
-    ('polera tommy hilfiger', 20.00, 2),
-    ('polera nike', 10.00, 2),
-    ('polera adidas', 15.00, 2),
-    ('polera puma', 7.00, 2);
+    ('Sony PlayStation 5', 500.00, 1);
 
 -- Crear tipo documento
 INSERT INTO tipo_doc(nombre) VALUES ('Boleta'), ('Factura');
