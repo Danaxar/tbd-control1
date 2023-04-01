@@ -60,8 +60,10 @@ CREATE TABLE venta (
   -- FK
   id_tienda INT NOT NULL,
   id_tipodoc INT NOT NULL,
+  id_vendedor INT NOT NULL,
   FOREIGN KEY (id_tienda) REFERENCES tienda(id_tienda),
-  FOREIGN KEY (id_tipodoc) REFERENCES tipo_doc(id_tipodoc)
+  FOREIGN KEY (id_tipodoc) REFERENCES tipo_doc(id_tipodoc),
+  FOREIGN KEY (id_vendedor) REFERENCES vendedor(id_vendedor)
 );
 
 CREATE TABLE prod_venta (
@@ -69,10 +71,8 @@ CREATE TABLE prod_venta (
   -- FK
   id_venta INT NOT NULL,
   id_producto INT NOT NULL,
-  id_vendedor INT NOT NULL,
   FOREIGN KEY (id_venta) REFERENCES venta(id_venta),
   FOREIGN KEY (id_producto) REFERENCES producto(id_producto),
-  FOREIGN KEY (id_vendedor) REFERENCES vendedor(id_vendedor)
 );
 
 CREATE TABLE sueldo (
