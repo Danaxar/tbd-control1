@@ -38,11 +38,18 @@ Pregunta 2: Suponiendo..
 
 -- Para las preguntas 5 y 6
 
--- Para las preguntas 7 y 8
-/*
-Se necesitan varios vendedores -> varias tiendas
-Se necesitan varias ventas -> varios productos
-*/
+-- Para las preguntas 7 y 8     D A N I E L 
+DELETE FROM prod_venta;
+DELETE FROM venta;
+DELETE FROM producto;
+DELETE FROM vendedor;
+DELETE FROM tienda_emp;
+DELETE FROM tienda;
+DELETE FROM empleado;
+DELETE FROM sueldo;
+DELETE FROM tipo_doc;
+DELETE FROM comuna;
+
 -- Crear comuna
 INSERT INTO comuna(nombre) VALUES('Maipu');
 

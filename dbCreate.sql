@@ -9,6 +9,7 @@ DROP TABLE IF EXISTS empleado;
 DROP TABLE IF EXISTS sueldo;
 DROP TABLE IF EXISTS tipo_doc;
 DROP TABLE IF EXISTS comuna;
+/*Si los drop fallan, eliminar las vistas que dependen de estas tablas*/
 
 CREATE TABLE comuna (
   id_comuna SERIAL PRIMARY KEY,
