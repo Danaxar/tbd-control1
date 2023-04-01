@@ -72,7 +72,7 @@ CREATE TABLE prod_venta (
   id_venta INT NOT NULL,
   id_producto INT NOT NULL,
   FOREIGN KEY (id_venta) REFERENCES venta(id_venta),
-  FOREIGN KEY (id_producto) REFERENCES producto(id_producto),
+  FOREIGN KEY (id_producto) REFERENCES producto(id_producto)
 );
 
 CREATE TABLE sueldo (
