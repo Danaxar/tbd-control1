@@ -1,4 +1,8 @@
 -- Borrar tablas si es que existen
+drop view if exists v12;
+drop view if exists v11;
+drop view if exists v10;
+DROP VIEW IF EXISTS v9;
 DROP VIEW IF EXISTS v8;
 DROP VIEW IF EXISTS v7;
 DROP VIEW IF EXISTS v6;

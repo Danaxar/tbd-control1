@@ -40,56 +40,66 @@ CREATE VIEW v3 AS (
 	WHERE v2.max = v1.total AND v2.year = v1.year ORDER BY year
 );
 
----------------- R E S P U E S T A:  Obtener los nombres de los trabajadores
+---------------- R E S P U E S T A:  Obtener los nombres de los trabajadores --------
 SELECT v3.year, v3.max, empleado.nombre, empleado.apellido
 FROM v3
 	JOIN vendedor ON v3.id_vendedor = vendedor.id_vendedor
 	JOIN empleado ON vendedor.id_empleado = empleado.id_empleado;
+-------------------------------------------------------------------------------------
 
 --- Pregunta 8: El vendedor con más productos vendidos por tienda
 -- Obtener 
-drop view if exists v8;
-drop view if exists v7;
-drop view if exists v6;
-drop view if exists v5;
-drop view if exists v4;
+drop view if exists v12;
+drop view if exists v11;
+drop view if exists v10;
+drop view if exists v9;
 
--- Obtener id del empleado y sus ventas
-create view v6 as (
-	select empleado.id_empleado, count(*) as ventas
-	from (
-		-- Obtener id_productoventa e id_vendedor
-		select id_productoventa, id_vendedor
-		from prod_venta
-			join venta on prod_venta.id_venta = venta.id_venta
-	) as v5 
-	-- Join con empleado para obtener el id de empleado
-	join empleado on v5.id_vendedor = empleado.id_empleado
-	group by empleado.id_empleado
+-- id_productoventa | nombre | apellido
+drop view if exists v9;
+create view v9 as (
+	select pd.id_productoventa, vend.id_vendedor, v.id_tienda
+	from prod_venta as pd
+		-- Juntar con ventas para obtener el id del vendedor
+		join venta as v on pd.id_venta = v.id_venta
+		-- Juntar con vendedor para obtener el id de empleado
+		join vendedor as vend on vend.id_vendedor = v.id_vendedor
 );
-select * from v6;
+select * from v9;
 
--- Agregar el nombre de la tienda en la que participa
-create view v7 as (
-	select v6.id_empleado, v6.ventas, tienda.nombre
-	from v6
-		join tienda_emp on tienda_emp.id_empleado = v6.id_empleado
-		join tienda on tienda_emp.id_tienda = tienda.id_tienda
+-- Obtener la cantidad total de productos vendidos por vendedor
+drop view if exists v10;
+create view v10 as (
+	select id_vendedor, id_tienda, count(*) as vendidos 
+	from v9 
+	group by id_vendedor, id_tienda 
+	order by id_vendedor
 );
-select * from v7;
+select * from v10;
 
--- Nombre de la tienda | Máxima cantidad de 
-create view v8 as (
-	select v7.nombre, max(v7.ventas)
-	from v7
-	group by nombre
+-- Agrupar por tienda y mantener lo que tienen el máximo
+drop view if exists v11;
+create view v11 as (
+	select id_tienda, max(vendidos)
+	from v10
+	group by id_tienda
+	order by id_tienda
 );
-select * from v8;
+
+create view v12 as (
+	select v11.id_tienda, v10.id_vendedor, v10.vendidos
+	from v11 join v10 on v11.max = v10.vendidos and v11.id_tienda = v10.id_tienda
+	order by v11.id_tienda
+);
 
 ---------------- R E S P U E S T A: Coincidir el numero de ventas y tienda con empleado de dicha tienda con dichas ventas
-select v8.nombre, v8.max, empleado.nombre, empleado.apellido
-from v8, v7 join empleado on v7.id_empleado = empleado.id_empleado
-where v8.max = v7.ventas;
+select tienda.nombre, empleado.nombre, empleado.apellido, v12.vendidos
+from v12
+	join tienda on v12.id_tienda = tienda.id_tienda
+	join vendedor on v12.id_vendedor = vendedor.id_vendedor
+	join empleado on vendedor.id_empleado = empleado.id_empleado
+-----------------------------------------------------------------------------
+
+
 
 -- Preguntas 9 y 10
 
