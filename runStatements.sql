@@ -40,7 +40,7 @@ SELECT MIN(precio) FROM producto WHERE id_tienda = tienda.id_tienda
 SELECT id_tipodoc, extract(MONTH from fecha) as mes, extract(YEAR from fecha) as an, SUM(total) AS ventas_mes
 FROM venta
 GROUP BY mes, an, id_tipodoc
-ORDER BY an;
+ORDER BY an, mes;
 
 -- Query de respuesta 4
 DROP VIEW IF EXISTS b2;
