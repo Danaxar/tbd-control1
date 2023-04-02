@@ -128,24 +128,24 @@ DROP VIEW IF EXISTS b3;
 DROP VIEW IF EXISTS b2;
 DROP VIEW IF EXISTS b1;
 -- Cambia la fecha por mes
-create view b1 as (
-    SELECT id_venta, total, extract(MONTH FROM fecha) AS mes, id_tienda
+CREATE VIEW b1 AS (
+    SELECT id_venta, total, EXTRACT(MONTH FROM fecha) AS mes, id_tienda
     FROM venta
 );
 -- Agrupamos las ganancias de cada tienda por mes
-create view b2 as (
-    SELECT b1.id_tienda, b1.mes, sum(b1.total)
+CREATE VIEW b2 AS (
+    SELECT b1.id_tienda, b1.mes, SUM(b1.total)
     FROM b1
     GROUP BY b1.id_tienda, b1.mes
 );
 -- Obtenemos el minimo de cada mes en ventas
-create view b3 as (
-    SELECT b2.mes, min(b2.sum)
+CREATE VIEW b3 AS (
+    SELECT b2.mes, MIN(b2.sum)
     FROM b2
     GROUP BY b2.mes
-);SELECT
+);
 -- Asociamos la tienda que tiene el minimo recaudado en ventas por mes
-create view b4 as (
+CREATE VIEW b4 AS (
 	SELECT b3.mes, b3.min, b2.id_tienda
 	FROM b3, b2
 	WHERE b3.min = b2.sum AND b3.mes = b2.mes
