@@ -64,6 +64,30 @@ FROM b1, b2
 WHERE b1.id_tienda = b2.id_tienda AND b2.max_monto = b1.monto;
 
 -- Preguntas 5 y 6
+-- Pregunta 5: Obtener el nombre de la tienda con menos empleados
+SELECT t.nombre
+FROM tienda t
+JOIN (
+	SELECT id_tienda, COUNT(*) as cant_empleados
+	FROM tienda_emp
+	GROUP BY id_tienda
+	HAVING COUNT(*) = (
+    SELECT MIN(cant_empleados)
+    FROM (
+		SELECT id_tienda, COUNT(*) as cant_empleados
+		FROM tienda_emp
+		GROUP BY id_tienda
+    ) AS emp_tienda
+	)
+) AS tienda_emp_count ON t.id_tienda = tienda_emp_count.id_tienda LIMIT 1;
+-- Pregunta 6: Obtener el vendedor con más ventas por mes
+SELECT DISTINCT ON (date_trunc('month', v.fecha)) 
+	v.id_vendedor, e.nombre, e.apellido, date_trunc('month', v.fecha) AS mes, COUNT(*) AS ventas
+FROM venta v
+JOIN vendedor vd ON v.id_vendedor = vd.id_vendedor
+JOIN empleado e ON vd.id_empleado = e.id_empleado
+GROUP BY date_trunc('month', v.fecha), v.id_vendedor, e.nombre, e.apellido
+ORDER BY date_trunc('month', v.fecha), ventas DESC
 
 -- Preguntas 7 y 8
 --- Pregunta 7: El vendedor que ha recaudado más dinero para la tienda por año
