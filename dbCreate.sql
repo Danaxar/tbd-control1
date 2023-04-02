@@ -1,4 +1,11 @@
 -- Borrar tablas si es que existen
+DROP VIEW IF EXISTS a3;
+DROP VIEW IF EXISTS a2;
+DROP VIEW IF EXISTS a1;
+DROP VIEW IF EXISTS c4;
+DROP VIEW IF EXISTS c3;
+DROP VIEW IF EXISTS c2;
+DROP VIEW IF EXISTS c1;
 drop view if exists v12;
 drop view if exists v11;
 drop view if exists v10;
