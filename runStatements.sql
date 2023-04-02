@@ -43,8 +43,6 @@ GROUP BY mes, an, id_tipodoc
 ORDER BY an, mes;
 
 -- Query de respuesta 4
-DROP VIEW IF EXISTS b2;
-DROP VIEW IF EXISTS b1;
 
 CREATE VIEW b1 AS (
 SELECT E.id_empleado, E.nombre, E.Apellido, comuna.nombre as comuna, S.cargo, S.monto, Tie.fecha, Tie.id_tienda
