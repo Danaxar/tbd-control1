@@ -1,5 +1,30 @@
 -- Inicio
 -- Para las preguntas 1 y 2
+DELETE FROM prod_venta;
+DELETE FROM venta;
+DELETE FROM producto;
+DELETE FROM vendedor;
+DELETE FROM tienda_emp;
+DELETE FROM tienda;
+DELETE FROM empleado;
+DELETE FROM sueldo;
+DELETE FROM tipo_doc;
+DELETE FROM comuna;
+ALTER SEQUENCE prod_venta_id_productoventa_seq RESTART WITH 1;
+ALTER SEQUENCE venta_id_venta_seq RESTART WITH 1;
+ALTER SEQUENCE producto_id_producto_seq RESTART WITH 1;
+ALTER SEQUENCE vendedor_id_vendedor_seq RESTART WITH 1;
+ALTER SEQUENCE tienda_emp_id_tiendaemp_seq RESTART WITH 1;
+ALTER SEQUENCE tienda_id_tienda_seq RESTART WITH 1;
+ALTER SEQUENCE empleado_id_empleado_seq RESTART WITH 1;
+ALTER SEQUENCE sueldo_id_sueldo_seq RESTART WITH 1;
+ALTER SEQUENCE tipo_doc_id_tipodoc_seq RESTART WITH 1;
+ALTER SEQUENCE comuna_id_comuna_seq RESTART WITH 1;
+
+
+INSERT INTO comuna(nombre) VALUES('Maipu');
+INSERT INTO tienda(nombre, id_comuna) VALUES('Hites', 1);
+INSERT INTO tienda(nombre, id_comuna) VALUES('Ripley', 1);
 
 -- Crear comuna
 INSERT INTO comuna(nombre) VALUES('Puente Alto');
@@ -122,11 +147,29 @@ Pregunta 2: Suponiendo..
 
 -- Para las preguntas 5 y 6
 
--- Para las preguntas 7 y 8
-/*
-Se necesitan varios vendedores -> varias tiendas
-Se necesitan varias ventas -> varios productos
-*/
+-- Para las preguntas 7 y 8     D A N I E L 
+
+DELETE FROM prod_venta;
+DELETE FROM venta;
+DELETE FROM producto;
+DELETE FROM vendedor;
+DELETE FROM tienda_emp;
+DELETE FROM tienda;
+DELETE FROM empleado;
+DELETE FROM sueldo;
+DELETE FROM tipo_doc;
+DELETE FROM comuna;
+ALTER SEQUENCE prod_venta_id_productoventa_seq RESTART WITH 1;
+ALTER SEQUENCE venta_id_venta_seq RESTART WITH 1;
+ALTER SEQUENCE producto_id_producto_seq RESTART WITH 1;
+ALTER SEQUENCE vendedor_id_vendedor_seq RESTART WITH 1;
+ALTER SEQUENCE tienda_emp_id_tiendaemp_seq RESTART WITH 1;
+ALTER SEQUENCE tienda_id_tienda_seq RESTART WITH 1;
+ALTER SEQUENCE empleado_id_empleado_seq RESTART WITH 1;
+ALTER SEQUENCE sueldo_id_sueldo_seq RESTART WITH 1;
+ALTER SEQUENCE tipo_doc_id_tipodoc_seq RESTART WITH 1;
+ALTER SEQUENCE comuna_id_comuna_seq RESTART WITH 1;
+
 -- Crear comuna
 INSERT INTO comuna(nombre) VALUES('Maipu');
 
@@ -212,6 +255,96 @@ VALUES
     (6000.00, '01/01/2023', 1, 1, 1),
     (1500.00, '01/01/2023', 1, 1, 2),
     (2000.00, '01/01/2023', 1, 1, 3);
+
+INSERT INTO prod_venta(id_producto, id_venta)
+VALUES
+	-- 2020
+	-- 1 iphone
+	(1, 1),
+	-- 4 samsung
+	(2, 2),(2, 2),(2, 2),(2, 2),
+	-- 4 ps5
+	(3, 3),(3, 3),(3, 3),(3, 3),
+	
+	-- 2021
+	-- 2 iphone
+	(1,4),(1,4),
+	-- 3 samsung
+	(2,5),(2,5),(2,5),
+	-- 4 ps5
+	(3, 6),(3, 6),(3, 6),(3, 6),
+	
+	-- 2022
+	-- 3 iphone
+	(1,7),(1,7),(1,7),
+	-- 2 samsung
+	(2, 8),(2, 8),
+	-- 10 ps5
+	(3, 9),(3, 9),(3, 9),(3, 9),(3, 9),
+	(3, 9),(3, 9),(3, 9),(3, 9),(3, 9),
+	
+	--2023
+	-- 4 iphone
+	(1,10),(1,10),(1,10),(1,10),
+	-- 1 samsung
+	(2,11),
+	-- 4 ps5
+	(3,12),(3,12),(3,12),(3,12);
+	
+
+--- Datos para la pregunta 8
+/*
+    Utilizando los mismos datos:
+        Daniel lleva 10 productos vendidos en Hites
+        Jhoisan lleva 22 productos vendidos en Hites
+    
+    Se agregará a Alan Donoso como vendedor de 15 productos en Ripley
+    Se agregará a Diego Ramirez como vendedor de 16 productos en ripley
+
+    Por lo tanto, la salida debería ser:
+        Hites: Jhoisan
+        Ripley: Diego Ramirez
+
+*/
+-- Crear 2 empleados nuevos
+INSERT INTO empleado(nombre, apellido, id_comuna)
+VALUES
+    ('Alan', 'Donoso', 1),
+    ('Diego', 'Ramirez', 1);
+
+-- Crear los vendedores
+INSERT INTO vendedor(id_empleado) VALUES (4), (5);
+
+INSERT INTO sueldo(cargo, monto) VALUES ('Operador', 500000);
+
+-- Asignarlos empleados a tienda
+INSERT INTO tienda_emp(id_empleado, id_tienda, id_sueldo, fecha)
+VALUES
+	(1,1,1, '01/01/2023'),
+	(2,1,1, '01/01/2023'),
+	(3,1,1, '01/01/2023'),
+	
+	(4,2,1, '01/01/2023'),
+	(5,2,1, '01/01/2023');
+
+--! Ventas
+INSERT INTO venta(total, fecha, id_tienda, id_tipodoc, id_vendedor)
+VALUES
+    (1000000.00, '01/01/2023', 2, 1, 4),
+    (1000000.00, '01/01/2023', 2, 1, 5);
+
+INSERT INTO prod_venta(id_producto, id_venta)
+VALUES
+	-- 15 veces
+    (1,13),(1,13),(1,13),(1,13),(1,13),
+    (1,13),(1,13),(1,13),(1,13),(1,13),
+    (1,13),(1,13),(1,13),(1,13),(1,13),
+
+	-- 16 veces
+    (2,14),(2,14),(2,14),(2,14),
+    (2,14),(2,14),(2,14),(2,14),
+    (2,14),(2,14),(2,14),(2,14),
+    (2,14),(2,14),(2,14),(2,14);
 
 -- Para las preguntas 9 y 10
 
