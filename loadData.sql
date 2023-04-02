@@ -1,437 +1,196 @@
--- Inicio
--- Para las preguntas 1 y 2
-DELETE FROM prod_venta;
-DELETE FROM venta;
-DELETE FROM producto;
-DELETE FROM vendedor;
-DELETE FROM tienda_emp;
-DELETE FROM tienda;
-DELETE FROM empleado;
-DELETE FROM sueldo;
-DELETE FROM tipo_doc;
-DELETE FROM comuna;
-ALTER SEQUENCE prod_venta_id_productoventa_seq RESTART WITH 1;
-ALTER SEQUENCE venta_id_venta_seq RESTART WITH 1;
-ALTER SEQUENCE producto_id_producto_seq RESTART WITH 1;
-ALTER SEQUENCE vendedor_id_vendedor_seq RESTART WITH 1;
-ALTER SEQUENCE tienda_emp_id_tiendaemp_seq RESTART WITH 1;
-ALTER SEQUENCE tienda_id_tienda_seq RESTART WITH 1;
-ALTER SEQUENCE empleado_id_empleado_seq RESTART WITH 1;
-ALTER SEQUENCE sueldo_id_sueldo_seq RESTART WITH 1;
-ALTER SEQUENCE tipo_doc_id_tipodoc_seq RESTART WITH 1;
-ALTER SEQUENCE comuna_id_comuna_seq RESTART WITH 1;
+-- Comunas
+INSERT INTO comuna (nombre) VALUES ('Santiago');
+INSERT INTO comuna (nombre) VALUES ('Providencia');
+INSERT INTO comuna (nombre) VALUES ('Maipú');
+INSERT INTO comuna (nombre) VALUES ('Estación Central');
+
+-- Tiendas
+INSERT INTO tienda (nombre, id_comuna) VALUES ('Hites', 1);
+INSERT INTO tienda (nombre, id_comuna) VALUES ('Ripley', 2);
+INSERT INTO tienda (nombre, id_comuna) VALUES ('Falabella', 3);
+INSERT INTO tienda (nombre, id_comuna) VALUES ('Paris', 4);
+INSERT INTO tienda (nombre, id_comuna) VALUES ('Tricot', 2);
+INSERT INTO tienda (nombre, id_comuna) VALUES ('Abcdin', 1);
+INSERT INTO tienda (nombre, id_comuna) VALUES ('La Polar', 3);
+
+-- Tipo de documento
+INSERT INTO tipo_doc (nombre) VALUES ('Boleta'), ('Factura');
 
 
-INSERT INTO comuna(nombre) VALUES('Maipu');
-INSERT INTO tienda(nombre, id_comuna) VALUES('Hites', 1);
-INSERT INTO tienda(nombre, id_comuna) VALUES('Ripley', 1);
-
--- Crear comuna
-INSERT INTO comuna(nombre) VALUES('Puente Alto');
-INSERT INTO comuna(nombre) VALUES('Santiago');
-INSERT INTO comuna(nombre) VALUES('Providencia');
-INSERT INTO comuna(nombre) VALUES('Las Condes');
-INSERT INTO comuna(nombre) VALUES('Ñuñoa');
-
--- Crear tienda
-INSERT INTO tienda(nombre, id_comuna) VALUES('Tienda A', 1);
-INSERT INTO tienda(nombre, id_comuna) VALUES('Tienda B', 1);
-INSERT INTO tienda (nombre, id_comuna) VALUES ('Tienda C', 3);
-INSERT INTO tienda (nombre, id_comuna) VALUES ('Tienda D', 4);
-INSERT INTO tienda (nombre, id_comuna) VALUES ('Tienda E', 5);
-
--- Insertar datos en la tabla empleado
-INSERT INTO empleado (nombre, apellido, id_comuna) VALUES
-  ('Juan', 'Pérez', 1),
-  ('María', 'González', 2),
-  ('Pedro', 'Rodríguez', 3),
-  ('Carla', 'Díaz', 4),
-  ('Miguel', 'Vega', 5);
-
-
--- Crear vendedores
-INSERT INTO vendedor(id_empleado) VALUES (1), (2), (3); --DA ERROR
-INSERT INTO vendedor(id_empleado) VALUES (2), (2), (3);
-INSERT INTO vendedor(id_empleado) VALUES (3), (2), (3);
-INSERT INTO vendedor(id_empleado) VALUES (4), (2), (3);
-INSERT INTO vendedor(id_empleado) VALUES (5), (2), (3);
-
--- Crear productos
-INSERT INTO producto(nombre, precio, id_tienda)
+-- Empleado
+INSERT INTO empleado (nombre, apellido, id_comuna)
 VALUES 
-    ('Xiaomi mi 10T pro', 1500.00, 1),
-    ('Huawei p50 pro', 1000.00, 1),
-    ('Xbox One', 500.00, 1),
-    ('Sony PlayStation 2', 20.00, 1),
-    ('polera tommy hilfiger', 20.00, 2),
-    ('polera nike', 10.00, 2),
-    ('polera adidas', 15.00, 2),
-	('polera adidas2', 15.00, 3),
-	('polera adidas3', 15.00, 4),
-	('polera adidas4', 15.00, 5),
-    ('polera puma', 7.00, 2);
+  ('Sofía', 'López', 1),
+  ('Martín', 'Castro', 2),
+  ('Natalia', 'Torres', 3),
+  ('Franco', 'Sánchez', 4),
+  ('Valentina', 'Ramírez', 1),
+  ('Juan', 'Gómez', 3),
+  ('Camila', 'Fernández', 3),
+  ('Lucas', 'Martínez', 4),
+  ('Emilia', 'Pérez', 1),
+  ('Tomás', 'González', 1),
+  ('Isabella', 'Álvarez', 1),
+  ('Mateo', 'Morales', 3),
+  ('Olivia', 'Silva', 3),
+  ('Benjamín', 'Ruiz', 4),
+  ('Victoria', 'Castro', 4),
+  ('Agustín', 'Herrera', 2),
+  ('Amelia', 'Ortiz', 2),
+  ('Ignacio', 'Flores', 2),
+  ('Martina', 'González', 3),
+  ('Santiago', 'García', 3),
+  ('Ana', 'Rodríguez', 3),
+  ('Facundo', 'Díaz', 2),
+  ('Renata', 'Martínez', 3),
+  ('Manuel', 'Castro', 4),
+  ('Isidora', 'Pérez', 1);
 
+-- Empleado
+INSERT INTO vendedor (id_empleado) 
+VALUES
+	(1),  (2),  (3),  (4),  (5), 
+	(6),  (7),  (8),  (9),  (10), 
+	(11), (12), (13), (14), (15), 
+	(16), (17), (18), (19), (20), 
+	(21), (22), (23), (24), (25);
 
--- Insertar datos en la tabla tipo_doc
-INSERT INTO tipo_doc (nombre) VALUES
-  ('Boleta'),
-  ('Factura');
+-- Producto
+INSERT INTO producto (nombre, precio, id_tienda)
+VALUES
+  ('Bolso de mano', 10.500, 1),
+  ('Gorra', 4.900, 2),
+  ('Reloj de pulsera', 23.800, 3),
+  ('Cuaderno', 2.800, 4),
+  ('Gafas de sol', 8.200, 5),
+  ('Set de velas', 8.900, 6),
+  ('Cojín decorativo', 6.900, 7),
+  ('Caja de herramientas', 27.000, 1),
+  ('Cargador portátil', 21.900, 2),
+  ('Foco LED', 2.600, 3),
 
+  ('Organizador de escritorio', 9.600, 4),
+  ('Set de cubiertos', 12.800, 5),
+  ('Lámpara de techo', 22.100, 6),
+  ('Lupa', 3.900, 7),
+  ('Peluche', 5.400, 1),
+  ('Báscula de baño', 12.700, 2),
+  ('Funda para celular', 3.500, 3),
+  ('Set de cuchillos', 36.000, 4),
+  ('Cámara fotográfica', 32.400, 5),
+  ('Taza térmica', 6.500, 6),
+
+  ('Planta artificial', 18.300, 7),
+  ('Pintura acrílica', 4.500, 1),
+  ('Licuadora', 27.900, 2),
+  ('Estuche escolar', 4.500, 3),
+  ('Set de brochas de maquillaje', 14.800, 4),
+  ('Candelabro', 11.400, 5),
+  ('Bote de basura', 15.200, 6),
+  ('Portarretrato digital', 24.000, 7),
+  ('Pelota de tenis', 4.200, 1),
+  ('Cepillo de limpieza facial', 3.200, 2),
+
+  ('Almohadilla térmica', 14.500, 3),
+  ('Set de tenedores', 10.300, 4),
+  ('Set de copas', 17.600, 5),
+  ('Juego de mesa', 28.000, 6),
+  ('Espejo de pared', 15.500, 7),
+  ('Almohada', 7.900, 1),
+  ('Corbata', 12.300, 2),
+  ('Cámara de seguridad', 45.700, 3),
+  ('Cinturón', 9.700, 4),
+  ('Estuche de maquillaje', 13.600, 5);
+  -- 40 Productos en total
   
-  INSERT INTO venta(total, fecha, id_tienda, id_tipodoc, id_vendedor)
-  VALUES
-    (1500.00, '01/01/2021', 1, 1, 1),
-    (6000.00, '01/02/2021', 1, 1, 2),
-    (2000.00, '01/03/2021', 1, 1, 3),
-	(120.00,  '01/04/2021', 4, 2, 4),
-    (80.00,   '01/05/2021', 5, 1, 5);
-	
--- Insertar datos en la tabla prod_venta 
-INSERT INTO prod_venta (id_producto, id_venta) VALUES  
-  (1, 1),
-  (1, 1),
-  (2, 1),
-  (2, 2),
-  (2, 2),
-  (3, 2); 
-
-
--- Insertar datos en la tabla sueldo
-INSERT INTO sueldo (cargo, monto) VALUES
-  ('Vendedor', 500.00),
-  ('Supervisor', 1000.00),
-  ('Gerente', 2000.00);
-
-/*
-Pregunta 1: Suponiendo.. las ventas se generan en la tabla prod_venta
-
-1 es Xiaomi, 2 Huawei
-(id_producto, id_venta) 
-
-  (1, 1), -> xiaomi se vendio el mes 1
-  (1, 1), -> xiaomi se vendio el mes 1
-  (2, 1), -> huawei se vendio el mes 1
-
-GANADOR DEL MES 1 XIAOMI
-
-  (2, 2), -> huawei se vendio el mes 2
-  (2, 2), -> huawei se vendio el mes 2
-  (3, 2); -> xbox se vendio el mes 2
-
-GANADOR DEL MES 2 HUAWEI
-
-
-
-Pregunta 2: Suponiendo..
-
-
-    Hites vende:
-        ('Xiaomi mi 10T pro', 1500.00, 1),
-    |   ('Huawei p50 pro', 1000.00, 1),
-        ('Xbox One', 500.00, 1),
-        ('Sony PlayStation 2', 20.00, 1) -> Producto más barato
-
-    Ripley vende:
-        ('polera tommy hilfiger', 20.00, 2)
-        ('polera nike', 10.00, 2)
-        ('polera adidas', 15.00, 2)
-        ('polera puma', 7.00, 2) -> Producto más barato
-
-    Por lo tanto, la consulta deberia entregarnos:
-        Hites -> Sony PlayStation 2 producto más barato
-        Ripley -> polera puma producto más barato
-
-*/
-
--- Para las preguntas 3 y 4
-
--- Pregunta 3 ventas por mes, separadas entre Boletas y Facturas.
-
-DELETE FROM prod_venta;
-DELETE FROM venta;
-DELETE FROM producto;
-DELETE FROM vendedor;
-DELETE FROM tienda_emp;
-DELETE FROM tienda;
-DELETE FROM empleado;
-DELETE FROM sueldo;
-DELETE FROM tipo_doc;
-DELETE FROM comuna;
-ALTER SEQUENCE prod_venta_id_productoventa_seq RESTART WITH 1;
-ALTER SEQUENCE venta_id_venta_seq RESTART WITH 1;
-ALTER SEQUENCE producto_id_producto_seq RESTART WITH 1;
-ALTER SEQUENCE vendedor_id_vendedor_seq RESTART WITH 1;
-ALTER SEQUENCE tienda_emp_id_tiendaemp_seq RESTART WITH 1;
-ALTER SEQUENCE tienda_id_tienda_seq RESTART WITH 1;
-ALTER SEQUENCE empleado_id_empleado_seq RESTART WITH 1;
-ALTER SEQUENCE sueldo_id_sueldo_seq RESTART WITH 1;
-ALTER SEQUENCE tipo_doc_id_tipodoc_seq RESTART WITH 1;
-ALTER SEQUENCE comuna_id_comuna_seq RESTART WITH 1;
-
-INSERT INTO comuna(id_comuna, nombre) 
-VALUES
-	(1, 'Santiago'),
-	(2, 'Estacion Central');
-	
-select * from tienda;
-
-INSERT INTO tienda(nombre, id_comuna) VALUES('Hites', 1);
-INSERT INTO tienda(nombre, id_comuna) VALUES('Ripley', 1);
-
-INSERT INTO tipo_doc(nombre) VALUES ('Boleta'), ('Factura');
-
-
-INSERT INTO empleado(nombre, apellido, id_comuna)
-VALUES
-    ('Daniel', 'Catalan', 1),
-    ('Diego', 'Acuna', 1),
-    ('Jhoisan', 'Allendes', 1);
-
-INSERT INTO vendedor(id_empleado) VALUES (1), (2), (3);
-
+  
 INSERT INTO venta(total, fecha, id_tienda, id_tipodoc, id_vendedor)
 VALUES
-    (1500.00, '01/01/2020', 1, 1, 1),
-    (6000.00, '01/01/2020', 1, 1, 2),
-    (2000.00, '01/01/2020', 1, 1, 3);
-
--- 2021
-INSERT INTO venta(total, fecha, id_tienda, id_tipodoc, id_vendedor)
+  (25000, '2020-01-01', 1, 1, 1),
+  (12500, '2020-02-01', 2, 2, 2),
+  (32000, '2020-03-01', 3, 1, 3),
+  (7400, '2020-04-01', 4, 2, 4),
+  (16400, '2020-05-01', 5, 1, 5),
+  (9200, '2020-06-01', 6, 2, 6),
+  (31000, '2020-07-01', 7, 1, 7),
+  (11250, '2020-08-01', 1, 2, 8),
+  (21800, '2020-09-01', 2, 1, 9),
+  (6300, '2020-10-01', 3, 2, 10),
+  (13200, '2020-11-01', 4, 1, 11),
+  (26500, '2020-12-01', 5, 2, 12),
+  (14350, '2021-01-01', 6, 1, 13),
+  (38500, '2021-02-01', 7, 2, 14),
+  (8200, '2021-03-01', 1, 1, 15),
+  (16250, '2021-04-01', 2, 2, 16),
+  (29400, '2021-05-01', 3, 1, 17),
+  (5600, '2021-06-01', 4, 2, 18),
+  (17850, '2021-07-01', 5, 1, 19),
+  (9900, '2021-08-01', 6, 2, 20),
+  (22300, '2021-09-01', 7, 1, 21),
+  (13400, '2021-10-01', 1, 2, 22),
+  (18750, '2021-11-01', 2, 1, 23),
+  (9400, '2021-12-01', 3, 2, 24),
+  (30650, '2022-01-01', 4, 1, 25),
+  (17400, '2022-02-01', 5, 2, 1),
+  (11300, '2022-03-01', 6, 1, 2),
+  (26200, '2022-04-01', 7, 2, 3),
+  (14650, '2022-05-01', 1, 1, 4),
+  (25500, '2022-06-01', 2, 2, 5),
+  (18600, '2022-07-01', 3, 1, 6);
+ 
+-- Producto venta
+INSERT INTO prod_venta (id_producto, id_venta)
 VALUES
-    (3000.00, '01/01/2021', 1, 2, 1),
-    (4500.00, '01/01/2021', 1, 2, 2),
-    (2000.00, '01/01/2021', 1, 2, 3);
+  (1, 1),  (2, 1),  (3, 1),  (4, 2),  (5, 2),
+  (6, 2),  (7, 3),  (8, 3),  (9, 4),  (10, 4),
+  (11, 5),  (12, 5),  (13, 5),  (14, 6),  (15, 6),
+  (16, 6),  (17, 7),  (18, 7),  (19, 7),  (20, 8),
+  (21, 8),  (22, 8),  (23, 9),  (24, 9),  (25, 9),
+  (26, 10),  (27, 10),  (28, 11),  (29, 11),  (30, 12),
+  (31, 12),  (32, 12),  (33, 13),  (34, 13),  (35, 13),
+  (36, 14),  (37, 14),  (38, 14),  (39, 15),  (40, 15);
 
--- 2022
-INSERT INTO venta(total, fecha, id_tienda, id_tipodoc, id_vendedor)
+INSERT INTO sueldo (cargo, monto)
 VALUES
-    (4500.00, '01/01/2022', 1, 1, 1),
-    (3000.00, '01/01/2022', 1, 1, 2),
-    (5000.00, '01/01/2022', 1, 1, 3);
-
--- 2023
-INSERT INTO venta(total, fecha, id_tienda, id_tipodoc, id_vendedor)
-VALUES
-    (6000.00, '01/01/2023', 1, 2, 1),
-    (1500.00, '01/01/2023', 1, 2, 2),
-    (2000.00, '01/01/2023', 1, 2, 3);
-
--- 4. empleado que ganó más por tienda 2020, indicando la comuna donde vive y el cargo que tiene en la empresa
-
-INSERT INTO sueldo(cargo, monto) 
-VALUES
-	('Operador', 600000),
-	('Reponedor', 500000),
-	('Jefe', 1000000);
-
-INSERT INTO tienda_emp(id_empleado, id_tienda, id_sueldo, fecha)
-VALUES
-	(1,2,1, '01/01/2020'),
-	(2,1,2, '01/01/2020'),
-	(3,1,3, '01/01/2020');
-
-
--- Para las preguntas 5 y 6
-
--- Para las preguntas 7 y 8     D A N I E L 
-
-DELETE FROM prod_venta;
-DELETE FROM venta;
-DELETE FROM producto;
-DELETE FROM vendedor;
-DELETE FROM tienda_emp;
-DELETE FROM tienda;
-DELETE FROM empleado;
-DELETE FROM sueldo;
-DELETE FROM tipo_doc;
-DELETE FROM comuna;
-ALTER SEQUENCE prod_venta_id_productoventa_seq RESTART WITH 1;
-ALTER SEQUENCE venta_id_venta_seq RESTART WITH 1;
-ALTER SEQUENCE producto_id_producto_seq RESTART WITH 1;
-ALTER SEQUENCE vendedor_id_vendedor_seq RESTART WITH 1;
-ALTER SEQUENCE tienda_emp_id_tiendaemp_seq RESTART WITH 1;
-ALTER SEQUENCE tienda_id_tienda_seq RESTART WITH 1;
-ALTER SEQUENCE empleado_id_empleado_seq RESTART WITH 1;
-ALTER SEQUENCE sueldo_id_sueldo_seq RESTART WITH 1;
-ALTER SEQUENCE tipo_doc_id_tipodoc_seq RESTART WITH 1;
-ALTER SEQUENCE comuna_id_comuna_seq RESTART WITH 1;
-
--- Crear comuna
-INSERT INTO comuna(nombre) VALUES('Maipu');
-
--- Crear tienda
-INSERT INTO tienda(nombre, id_comuna) VALUES('Hites', 1);
-INSERT INTO tienda(nombre, id_comuna) VALUES('Ripley', 1);
-
--- Crear empleados
-INSERT INTO empleado(nombre, apellido, id_comuna)
-VALUES
-    ('Daniel', 'Catalan', 1),
-    ('Diego', 'Acuna', 1),
-    ('Jhoisan', 'Allendes', 1);
-
--- Crear vendedores
-INSERT INTO vendedor(id_empleado) VALUES (1), (2), (3);
-
--- Crear productos
-INSERT INTO producto(nombre, precio, id_tienda)
-VALUES 
-    ('iPhone 13 Pro Max', 1500.00, 1),
-    ('Samsung Galaxy S21 Ultra', 1000.00, 1),
-    ('Sony PlayStation 5', 500.00, 1);
-
--- Crear tipo documento
-INSERT INTO tipo_doc(nombre) VALUES ('Boleta'), ('Factura');
-
--- Crear ventas
-/*
-Suponiendo:
-    Daniel vende:
-        2020: 1 iphone = 1500 (3)
-        2021: 2 iphone = 3000 (2)
-        2022: 3 iphone = 4500 (2)
-        2023: 4 iphone = 6000 (1) W
-    Diego vende:
-        2020: 4 samsung = 6000 (1) W
-        2021: 3 samsung = 4500 (1) W
-        2022: 2 samsung = 3000 (3)
-        2023: 1 samsung = 1500 (3)
-    Jhoisan vende:
-        2020: 4  play station 5 = 2000 (2)
-        2021: 4  play station 5 = 2000 (3)
-        2022: 10 play station 5 = 5000 (1) W
-        2023: 4  play station 5 = 2000 (2)
-
-    Por lo tanto, si se pregunta por el vendedor que más ha vendido en cada año
-    La salida debería ser:
-
-                            año  | vendedor
-                            ---------------
-                            2020 |  Diego
-                            2021 |  Diego
-                            2022 |  Jhoisan
-                            2023 |  Daniel
-    
-*/
--- Se hacen todas las ventas en hites y se entrega boleta
--- 2020
-INSERT INTO venta(total, fecha, id_tienda, id_tipodoc, id_vendedor)
-VALUES
-    (1500.00, '01/01/2020', 1, 1, 1),
-    (6000.00, '01/01/2020', 1, 1, 2),
-    (2000.00, '01/01/2020', 1, 1, 3);
-
--- 2021
-INSERT INTO venta(total, fecha, id_tienda, id_tipodoc, id_vendedor)
-VALUES
-    (3000.00, '01/01/2021', 1, 1, 1),
-    (4500.00, '01/01/2021', 1, 1, 2),
-    (2000.00, '01/01/2021', 1, 1, 3);
-
--- 2022
-INSERT INTO venta(total, fecha, id_tienda, id_tipodoc, id_vendedor)
-VALUES
-    (4500.00, '01/01/2022', 1, 1, 1),
-    (3000.00, '01/01/2022', 1, 1, 2),
-    (5000.00, '01/01/2022', 1, 1, 3);
-
--- 2023
-INSERT INTO venta(total, fecha, id_tienda, id_tipodoc, id_vendedor)
-VALUES
-    (6000.00, '01/01/2023', 1, 1, 1),
-    (1500.00, '01/01/2023', 1, 1, 2),
-    (2000.00, '01/01/2023', 1, 1, 3);
-
-INSERT INTO prod_venta(id_producto, id_venta)
-VALUES
-	-- 2020
-	-- 1 iphone
-	(1, 1),
-	-- 4 samsung
-	(2, 2),(2, 2),(2, 2),(2, 2),
-	-- 4 ps5
-	(3, 3),(3, 3),(3, 3),(3, 3),
-	
-	-- 2021
-	-- 2 iphone
-	(1,4),(1,4),
-	-- 3 samsung
-	(2,5),(2,5),(2,5),
-	-- 4 ps5
-	(3, 6),(3, 6),(3, 6),(3, 6),
-	
-	-- 2022
-	-- 3 iphone
-	(1,7),(1,7),(1,7),
-	-- 2 samsung
-	(2, 8),(2, 8),
-	-- 10 ps5
-	(3, 9),(3, 9),(3, 9),(3, 9),(3, 9),
-	(3, 9),(3, 9),(3, 9),(3, 9),(3, 9),
-	
-	--2023
-	-- 4 iphone
-	(1,10),(1,10),(1,10),(1,10),
-	-- 1 samsung
-	(2,11),
-	-- 4 ps5
-	(3,12),(3,12),(3,12),(3,12);
-	
-
---- Datos para la pregunta 8
-/*
-    Utilizando los mismos datos:
-        Daniel lleva 10 productos vendidos en Hites
-        Jhoisan lleva 22 productos vendidos en Hites
-    
-    Se agregará a Alan Donoso como vendedor de 15 productos en Ripley
-    Se agregará a Diego Ramirez como vendedor de 16 productos en ripley
-
-    Por lo tanto, la salida debería ser:
-        Hites: Jhoisan
-        Ripley: Diego Ramirez
-
-*/
--- Crear 2 empleados nuevos
-INSERT INTO empleado(nombre, apellido, id_comuna)
-VALUES
-    ('Alan', 'Donoso', 1),
-    ('Diego', 'Ramirez', 1);
-
--- Crear los vendedores
-INSERT INTO vendedor(id_empleado) VALUES (4), (5);
-
-INSERT INTO sueldo(cargo, monto) VALUES ('Operador', 500000);
-
--- Asignarlos empleados a tienda
-INSERT INTO tienda_emp(id_empleado, id_tienda, id_sueldo, fecha)
-VALUES
-	(1,1,1, '01/01/2023'),
-	(2,1,1, '01/01/2023'),
-	(3,1,1, '01/01/2023'),
-	
-	(4,2,1, '01/01/2023'),
-	(5,2,1, '01/01/2023');
-
---! Ventas
-INSERT INTO venta(total, fecha, id_tienda, id_tipodoc, id_vendedor)
-VALUES
-    (1000000.00, '01/01/2023', 2, 1, 4),
-    (1000000.00, '01/01/2023', 2, 1, 5);
-
-INSERT INTO prod_venta(id_producto, id_venta)
-VALUES
-	-- 15 veces
-    (1,13),(1,13),(1,13),(1,13),(1,13),
-    (1,13),(1,13),(1,13),(1,13),(1,13),
-    (1,13),(1,13),(1,13),(1,13),(1,13),
-
-	-- 16 veces
-    (2,14),(2,14),(2,14),(2,14),
-    (2,14),(2,14),(2,14),(2,14),
-    (2,14),(2,14),(2,14),(2,14),
-    (2,14),(2,14),(2,14),(2,14);
-
--- Para las preguntas 9 y 10
-
--- Fin
+  ('Vendedor', 500000),
+  ('Encargado de tienda', 700000),
+  ('Jefe de tienda', 900000),
+  ('Cajero', 450000),
+  ('Visual merchandiser', 600000),
+  ('Promotor de ventas', 450000),
+  ('Asistente de ventas', 400000),
+  ('Operador', 350000);
+  
+INSERT INTO tienda_emp (fecha, id_empleado, id_tienda, id_sueldo) VALUES
+    ('2021-02-14', 11, 3, 7),
+    ('2021-06-30', 19, 4, 4),
+    ('2022-01-02', 10, 2, 3),
+    ('2021-08-07', 14, 1, 1),
+    ('2022-02-22', 23, 6, 5),
+    ('2021-11-09', 1, 2, 2),
+    ('2022-03-28', 5, 7, 5),
+    ('2021-07-05', 22, 5, 8),
+    ('2021-10-10', 7, 6, 3),
+    ('2022-04-19', 20, 1, 6),
+    ('2021-04-28', 6, 2, 2),
+    ('2022-02-05', 18, 5, 6),
+    ('2022-01-12', 13, 4, 1),
+    ('2021-05-23', 12, 1, 4),
+    ('2021-03-11', 16, 7, 4),
+    ('2022-05-08', 21, 3, 8),
+    ('2021-09-13', 17, 7, 1),
+    ('2021-11-02', 9, 3, 6),
+    ('2022-04-10', 3, 5, 7),
+    ('2022-01-25', 8, 7, 5),
+    ('2021-07-19', 15, 4, 3),
+    ('2022-03-06', 4, 6, 4),
+    ('2021-01-15', 2, 1, 5),
+    ('2022-06-01', 24, 2, 7),
+	  ('2020-08-12', 10, 4, 7),
+    ('2020-12-12', 5, 6, 6),
+    ('2020-01-23', 9, 5, 6),
+    ('2020-09-05', 16, 5, 4),
+    ('2020-11-06', 5, 7, 5),
+    ('2020-07-16', 3, 2, 6),
+    ('2020-04-19', 22, 1, 3),
+    ('2021-12-20', 25, 7, 8);
