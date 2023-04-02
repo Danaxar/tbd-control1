@@ -85,7 +85,7 @@ FROM venta v
 JOIN vendedor vd ON v.id_vendedor = vd.id_vendedor
 JOIN empleado e ON vd.id_empleado = e.id_empleado
 GROUP BY date_trunc('month', v.fecha), v.id_vendedor, e.nombre, e.apellido
-ORDER BY date_trunc('month', v.fecha), ventas DESC
+ORDER BY date_trunc('month', v.fecha), ventas DESC;
 
 -- Preguntas 7 y 8
 --- Pregunta 7: El vendedor que ha recaudado más dinero para la tienda por año
