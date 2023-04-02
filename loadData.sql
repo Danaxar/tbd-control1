@@ -234,14 +234,14 @@ INSERT INTO vendedor(id_empleado) VALUES (4), (5);
 INSERT INTO sueldo(cargo, monto) VALUES ('Operador', 500000);
 
 -- Asignarlos empleados a tienda
-INSERT INTO tienda_emp(id_empleado, id_tienda, id_sueldo)
+INSERT INTO tienda_emp(id_empleado, id_tienda, id_sueldo, fecha)
 VALUES
-	(1,1,1),
-	(2,1,1),
-	(3,1,1),
+	(1,1,1, '01/01/2023'),
+	(2,1,1, '01/01/2023'),
+	(3,1,1, '01/01/2023'),
 	
-	(4,2,1),
-	(5,2,1);
+	(4,2,1, '01/01/2023'),
+	(5,2,1, '01/01/2023');
 
 --! Ventas
 INSERT INTO venta(total, fecha, id_tienda, id_tipodoc, id_vendedor)

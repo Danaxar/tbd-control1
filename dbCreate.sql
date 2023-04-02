@@ -92,6 +92,7 @@ CREATE TABLE sueldo (
 
 CREATE TABLE tienda_emp (
     id_tiendaemp SERIAL PRIMARY KEY,
+    fecha DATE NOT NULL,
     -- FK
 	id_empleado INT NOT NULL,
   	id_tienda INT NOT NULL,
