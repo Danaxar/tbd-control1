@@ -148,7 +148,7 @@ select tienda.nombre, empleado.nombre, empleado.apellido, v12.vendidos
 from v12
 	join tienda on v12.id_tienda = tienda.id_tienda
 	join vendedor on v12.id_vendedor = vendedor.id_vendedor
-	join empleado on vendedor.id_empleado = empleado.id_empleado
+	join empleado on vendedor.id_empleado = empleado.id_empleado;
 -----------------------------------------------------------------------------
 
 
@@ -181,7 +181,7 @@ CREATE VIEW a3 as (
 -- Mostrar el nombre de la persona que tiene el sueldo maximo por mes
 SELECT a3.mes,e.nombre, e.apellido, a3.max
 FROM a3
-JOIN empleado e on a3.id_empleado =e.id_empleado
+JOIN empleado e on a3.id_empleado =e.id_empleado;
 
 
 --Pregunta 10
