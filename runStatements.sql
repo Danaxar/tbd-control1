@@ -92,5 +92,66 @@ from v8, v7 join empleado on v7.id_empleado = empleado.id_empleado
 where v8.max = v7.ventas;
 
 -- Preguntas 9 y 10
+-- Pregunta 9
+ 
+DROP VIEW IF EXISTS a3;
+DROP VIEW IF EXISTS a2;
+DROP VIEW IF EXISTS a1;
+--Cambia la fecha por mes
+CREATE VIEW a1 as (
+	SELECT te.id_empleado, EXTRACT(MONTH FROM te.fecha) mes,te.id_tiendaemp,s.monto
+	FROM tienda_emp te, sueldo s
+	WHERE te.id_sueldo = s.id_sueldo
+	ORDER BY mes ASC
+);
+-- Obtener sueldo maximo por mes
+CREATE VIEW a2 as (
+	SELECT a1.mes, MAX(monto)
+	FROM a1
+	GROUP BY a1.mes
+);
+-- Asociar el empleado que tiene el sueldo maximo
+CREATE VIEW a3 as (
+	SELECT a2.mes, a2.max, a1.id_empleado
+	FROM a2, a1
+	WHERE a2.max = a1.monto AND a2.mes = a1.mes
+);
+-- Mostrar el nombre de la persona que tiene el sueldo maximo por mes
+SELECT a3.mes,e.nombre, e.apellido, a3.max
+FROM a3
+JOIN empleado e on a3.id_empleado =e.id_empleado
 
+
+--Pregunta 10
+DROP VIEW IF EXISTS b4;
+DROP VIEW IF EXISTS b3;
+DROP VIEW IF EXISTS b2;
+DROP VIEW IF EXISTS b1;
+-- Cambia la fecha por mes
+create view b1 as (
+    SELECT id_venta, total, extract(MONTH FROM fecha) AS mes, id_tienda
+    FROM venta
+);
+-- Agrupamos las ganancias de cada tienda por mes
+create view b2 as (
+    SELECT b1.id_tienda, b1.mes, sum(b1.total)
+    FROM b1
+    GROUP BY b1.id_tienda, b1.mes
+);
+-- Obtenemos el minimo de cada mes en ventas
+create view b3 as (
+    SELECT b2.mes, min(b2.sum)
+    FROM b2
+    GROUP BY b2.mes
+);SELECT
+-- Asociamos la tienda que tiene el minimo recaudado en ventas por mes
+create view b4 as (
+	SELECT b3.mes, b3.min, b2.id_tienda
+	FROM b3, b2
+	WHERE b3.min = b2.sum AND b3.mes = b2.mes
+);
+-- Mostramos el nombre de la tienda que tiene el minimo recaudado por mes
+SELECT b4.mes, tienda.nombre, b4.min
+FROM b4 JOIN tienda ON b4.id_tienda = tienda.id_tienda
+ORDER BY b4.mes
 -- Fin
