@@ -145,6 +145,92 @@ Pregunta 2: Suponiendo..
 
 -- Para las preguntas 3 y 4
 
+-- Pregunta 3 ventas por mes, separadas entre Boletas y Facturas.
+
+DELETE FROM prod_venta;
+DELETE FROM venta;
+DELETE FROM producto;
+DELETE FROM vendedor;
+DELETE FROM tienda_emp;
+DELETE FROM tienda;
+DELETE FROM empleado;
+DELETE FROM sueldo;
+DELETE FROM tipo_doc;
+DELETE FROM comuna;
+ALTER SEQUENCE prod_venta_id_productoventa_seq RESTART WITH 1;
+ALTER SEQUENCE venta_id_venta_seq RESTART WITH 1;
+ALTER SEQUENCE producto_id_producto_seq RESTART WITH 1;
+ALTER SEQUENCE vendedor_id_vendedor_seq RESTART WITH 1;
+ALTER SEQUENCE tienda_emp_id_tiendaemp_seq RESTART WITH 1;
+ALTER SEQUENCE tienda_id_tienda_seq RESTART WITH 1;
+ALTER SEQUENCE empleado_id_empleado_seq RESTART WITH 1;
+ALTER SEQUENCE sueldo_id_sueldo_seq RESTART WITH 1;
+ALTER SEQUENCE tipo_doc_id_tipodoc_seq RESTART WITH 1;
+ALTER SEQUENCE comuna_id_comuna_seq RESTART WITH 1;
+
+INSERT INTO comuna(id_comuna, nombre) 
+VALUES
+	(1, 'Santiago'),
+	(2, 'Estacion Central');
+	
+select * from tienda;
+
+INSERT INTO tienda(nombre, id_comuna) VALUES('Hites', 1);
+INSERT INTO tienda(nombre, id_comuna) VALUES('Ripley', 1);
+
+INSERT INTO tipo_doc(nombre) VALUES ('Boleta'), ('Factura');
+
+
+INSERT INTO empleado(nombre, apellido, id_comuna)
+VALUES
+    ('Daniel', 'Catalan', 1),
+    ('Diego', 'Acuna', 1),
+    ('Jhoisan', 'Allendes', 1);
+
+INSERT INTO vendedor(id_empleado) VALUES (1), (2), (3);
+
+INSERT INTO venta(total, fecha, id_tienda, id_tipodoc, id_vendedor)
+VALUES
+    (1500.00, '01/01/2020', 1, 1, 1),
+    (6000.00, '01/01/2020', 1, 1, 2),
+    (2000.00, '01/01/2020', 1, 1, 3);
+
+-- 2021
+INSERT INTO venta(total, fecha, id_tienda, id_tipodoc, id_vendedor)
+VALUES
+    (3000.00, '01/01/2021', 1, 2, 1),
+    (4500.00, '01/01/2021', 1, 2, 2),
+    (2000.00, '01/01/2021', 1, 2, 3);
+
+-- 2022
+INSERT INTO venta(total, fecha, id_tienda, id_tipodoc, id_vendedor)
+VALUES
+    (4500.00, '01/01/2022', 1, 1, 1),
+    (3000.00, '01/01/2022', 1, 1, 2),
+    (5000.00, '01/01/2022', 1, 1, 3);
+
+-- 2023
+INSERT INTO venta(total, fecha, id_tienda, id_tipodoc, id_vendedor)
+VALUES
+    (6000.00, '01/01/2023', 1, 2, 1),
+    (1500.00, '01/01/2023', 1, 2, 2),
+    (2000.00, '01/01/2023', 1, 2, 3);
+
+-- 4. empleado que ganó más por tienda 2020, indicando la comuna donde vive y el cargo que tiene en la empresa
+
+INSERT INTO sueldo(cargo, monto) 
+VALUES
+	('Operador', 600000),
+	('Reponedor', 500000),
+	('Jefe', 1000000);
+
+INSERT INTO tienda_emp(id_empleado, id_tienda, id_sueldo, fecha)
+VALUES
+	(1,2,1, '01/01/2020'),
+	(2,1,2, '01/01/2020'),
+	(3,1,3, '01/01/2020');
+
+
 -- Para las preguntas 5 y 6
 
 -- Para las preguntas 7 y 8     D A N I E L 

@@ -35,6 +35,34 @@ SELECT MIN(precio) FROM producto WHERE id_tienda = tienda.id_tienda
 
 -- Preguntas 3 y 4
 
+-- Query de respuesta 3, se asume que se debe incluir el año ya que a pesar de ser el mismo mes
+-- pueden ser de años distintos.
+SELECT id_tipodoc, extract(MONTH from fecha) as mes, extract(YEAR from fecha) as an, SUM(total) AS ventas_mes
+FROM venta
+GROUP BY mes, an, id_tipodoc
+ORDER BY an;
+
+-- Query de respuesta 4
+DROP VIEW IF EXISTS b2;
+DROP VIEW IF EXISTS b1;
+
+CREATE VIEW b1 AS (
+SELECT E.id_empleado, E.nombre, E.Apellido, comuna.nombre as comuna, S.cargo, S.monto, Tie.fecha, Tie.id_tienda
+FROM empleado E
+INNER JOIN tienda_emp Tie ON E.id_empleado = Tie.id_empleado
+INNER JOIN Sueldo S ON Tie.id_sueldo = S.id_sueldo
+INNER JOIN comuna ON comuna.id_comuna = E.id_comuna
+WHERE extract(year from fecha) = '2020');
+
+CREATE VIEW b2 AS (
+SELECT b1.id_tienda, MAX(b1.monto) AS max_monto
+FROM b1
+GROUP BY b1.id_tienda);
+
+SELECT b1.id_tienda, b1.id_empleado, b1.nombre, b1.apellido, b1.comuna, b1.cargo, b2.max_monto
+FROM b1, b2
+WHERE b1.id_tienda = b2.id_tienda AND b2.max_monto = b1.monto;
+
 -- Preguntas 5 y 6
 
 -- Preguntas 7 y 8
