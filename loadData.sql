@@ -1,3 +1,27 @@
+-- Se limpian las tablas en caso de ser previamente pobladas
+DELETE FROM prod_venta;
+DELETE FROM venta;
+DELETE FROM producto;
+DELETE FROM vendedor;
+DELETE FROM tienda_emp;
+DELETE FROM tienda;
+DELETE FROM empleado;
+DELETE FROM sueldo;
+DELETE FROM tipo_doc;
+DELETE FROM comuna;
+
+-- se resetea el conteo de id's
+ALTER SEQUENCE prod_venta_id_productoventa_seq RESTART WITH 1;
+ALTER SEQUENCE venta_id_venta_seq RESTART WITH 1;
+ALTER SEQUENCE producto_id_producto_seq RESTART WITH 1;
+ALTER SEQUENCE vendedor_id_vendedor_seq RESTART WITH 1;
+ALTER SEQUENCE tienda_emp_id_tiendaemp_seq RESTART WITH 1;
+ALTER SEQUENCE tienda_id_tienda_seq RESTART WITH 1;
+ALTER SEQUENCE empleado_id_empleado_seq RESTART WITH 1;
+ALTER SEQUENCE sueldo_id_sueldo_seq RESTART WITH 1;
+ALTER SEQUENCE tipo_doc_id_tipodoc_seq RESTART WITH 1;
+ALTER SEQUENCE comuna_id_comuna_seq RESTART WITH 1;
+
 -- Comunas
 INSERT INTO comuna (nombre) VALUES ('Santiago');
 INSERT INTO comuna (nombre) VALUES ('Providencia');
@@ -147,11 +171,9 @@ VALUES
   (16, 6),  (17, 7),  (18, 7),  (19, 7),  (20, 8),
   (21, 8),  (22, 8),  (23, 9),  (24, 9),  (25, 9),
   (26, 10),  (27, 10),  (28, 11),  (29, 11),  (30, 12),
-  (31, 12),  (32, 12),  
-  -- aca empieza a comprar archivos desde el 2021
-  (33, 13),  (33, 13), (33, 13),  
+  (31, 12),  (32, 12),  (33, 13),  (33, 13), (33, 13),  
   (35, 13), (36, 14),  (36, 14), (36, 14), 
-  (37, 14),  (39, 15),  (39, 15),  (40, 15);
+  (37, 14),  (39, 15),  (39, 15), (40, 15);
 
 INSERT INTO sueldo (cargo, monto)
 VALUES

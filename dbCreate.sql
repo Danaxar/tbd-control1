@@ -1,3 +1,7 @@
+
+-- Comando para crear base de datos:
+-- CREATE DATABASE controltbd;
+
 -- Borrar tablas si es que existen
 DROP VIEW IF EXISTS a3;
 DROP VIEW IF EXISTS a2;
