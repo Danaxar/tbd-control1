@@ -1,8 +1,11 @@
 -- Inicio
 -- Preguntas 1 y 2
 
--- Respuesta 1:
+-- ******************************************************************************* --
 
+-- Pregunta 1: producto más vendido por mes en el 2021.
+
+-- ******************************************************************************* --
 WITH ventas_2021 AS (
   SELECT id_venta, fecha, EXTRACT(MONTH FROM fecha) AS mes
   FROM venta
@@ -23,27 +26,34 @@ SELECT pm.mes, pm.nombre AS producto_mas_vendido, pm.total_ventas
 FROM productos_mes pm
 WHERE pm.ranking = 1
 ORDER BY pm.mes;
+-- ******************************************************************************* --
 
+-- Pregunta 2: producto más económico por tienda.
 
--- Respuesta 2:
+-- ******************************************************************************* --
 SELECT tienda.nombre AS nombre_tienda, producto.nombre AS nombre_producto, producto.precio
 FROM tienda
 JOIN producto ON tienda.id_tienda = producto.id_tienda
 WHERE producto.precio = (
 SELECT MIN(precio) FROM producto WHERE id_tienda = tienda.id_tienda
 );
-
+-- ******************************************************************************* --
 -- Preguntas 3 y 4
 
+-- Pregunta 3: ventas por mes, separadas entre Boletas y Facturas.
+
+-- ******************************************************************************* --
 -- Query de respuesta 3, se asume que se debe incluir el año ya que a pesar de ser el mismo mes
 -- pueden ser de años distintos.
 SELECT id_tipodoc, extract(MONTH from fecha) as mes, extract(YEAR from fecha) as an, SUM(total) AS ventas_mes
 FROM venta
 GROUP BY mes, an, id_tipodoc
 ORDER BY an, mes;
+-- ******************************************************************************* --
 
--- Query de respuesta 4
+-- Pregunta 4: empleado que ganó más por tienda 2020, indicando la comuna donde vive y el cargo que tiene en la empresa
 
+-- ******************************************************************************* --
 DROP VIEW IF EXISTS b2;
 DROP VIEW IF EXISTS b1;
 
@@ -63,9 +73,13 @@ GROUP BY b1.id_tienda);
 SELECT b1.id_tienda, b1.id_empleado, b1.nombre, b1.apellido, b1.comuna, b1.cargo, b2.max_monto
 FROM b1, b2
 WHERE b1.id_tienda = b2.id_tienda AND b2.max_monto = b1.monto;
+-- ******************************************************************************* --
 
 -- Preguntas 5 y 6
+
 -- Pregunta 5: Obtener el nombre de la tienda con menos empleados
+
+-- ******************************************************************************* --
 SELECT t.nombre, COUNT(te.id_empleado) as num_empleados
 FROM tienda t
 JOIN tienda_emp te ON t.id_tienda = te.id_tienda
@@ -78,7 +92,11 @@ HAVING COUNT(*) = (
         GROUP BY id_tienda
     ) AS emp_tienda
 ) LIMIT 1;
+-- ******************************************************************************* --
+
 -- Pregunta 6: Obtener el vendedor con más ventas por mes
+
+-- ******************************************************************************* --
 SELECT DISTINCT ON (date_trunc('month', v.fecha)) 
 	e.nombre, e.apellido, date_trunc('month', v.fecha) AS mes, COUNT(*) AS ventas
 FROM venta v
@@ -86,9 +104,13 @@ JOIN vendedor vd ON v.id_vendedor = vd.id_vendedor
 JOIN empleado e ON vd.id_empleado = e.id_empleado
 GROUP BY date_trunc('month', v.fecha), v.id_vendedor, e.nombre, e.apellido
 ORDER BY date_trunc('month', v.fecha), ventas DESC;
+-- ******************************************************************************* --
 
 -- Preguntas 7 y 8
+
 --- Pregunta 7: El vendedor que ha recaudado más dinero para la tienda por año
+
+-- ******************************************************************************* --
 DROP VIEW IF EXISTS v3;
 DROP VIEW IF EXISTS v2;
 DROP VIEW IF EXISTS v1;
@@ -119,9 +141,11 @@ SELECT v3.year, v3.max, empleado.nombre, empleado.apellido
 FROM v3
 	JOIN vendedor ON v3.id_vendedor = vendedor.id_vendedor
 	JOIN empleado ON vendedor.id_empleado = empleado.id_empleado;
--------------------------------------------------------------------------------------
+-- ******************************************************************************* --
 
 --- Pregunta 8: El vendedor con más productos vendidos por tienda
+
+-- ******************************************************************************* --
 -- Obtener 
 drop view if exists v12;
 drop view if exists v11;
@@ -171,13 +195,13 @@ from v12
 	join tienda on v12.id_tienda = tienda.id_tienda
 	join vendedor on v12.id_vendedor = vendedor.id_vendedor
 	join empleado on vendedor.id_empleado = empleado.id_empleado;
------------------------------------------------------------------------------
-
-
+-- ******************************************************************************* --
 
 -- Preguntas 9 y 10
--- Pregunta 9
- 
+
+-- Pregunta 9: el empleado con mayor sueldo por mes.
+
+-- ******************************************************************************* --
 DROP VIEW IF EXISTS a3;
 DROP VIEW IF EXISTS a2;
 DROP VIEW IF EXISTS a1;
@@ -204,9 +228,11 @@ CREATE VIEW a3 as (
 SELECT a3.mes,e.nombre, e.apellido, a3.max
 FROM a3
 JOIN empleado e on a3.id_empleado =e.id_empleado;
+-- ******************************************************************************* --
 
+--Pregunta 10: la tienda que con menor recaudación por mes.
 
---Pregunta 10
+-- ******************************************************************************* --
 DROP VIEW IF EXISTS c4;
 DROP VIEW IF EXISTS c3;
 DROP VIEW IF EXISTS c2;
@@ -238,4 +264,5 @@ CREATE VIEW c4 AS (
 SELECT c4.mes, tienda.nombre, c4.min
 FROM c4 JOIN tienda ON c4.id_tienda = tienda.id_tienda
 ORDER BY c4.mes
+-- ******************************************************************************* --
 -- Fin

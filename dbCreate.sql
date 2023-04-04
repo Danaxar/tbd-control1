@@ -1,7 +1,8 @@
 
--- Comando para crear base de datos:
--- CREATE DATABASE controltbd;
-
+-- ATENCION, EJECUTAR EL SIGUIENTE COMANDO ANTES DE EJECUTAR COMPLETAMENTE EL PROGRAMA
+-----------------------------
+--> CREATE DATABASE controltbd;
+-----------------------------
 -- Borrar tablas si es que existen
 DROP VIEW IF EXISTS a3;
 DROP VIEW IF EXISTS a2;
